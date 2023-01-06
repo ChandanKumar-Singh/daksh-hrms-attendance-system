@@ -76,7 +76,7 @@ class PdfPreviewPage extends StatelessWidget {
         await networkImage(AppConst.baseUrl + invoice.employee!.companyLogo!);
 
     pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
+        pageFormat: PdfPageFormat.standard,
         build: (pw.Context context) {
           return pw.Column(
             children: [
@@ -440,366 +440,761 @@ class PdfPreviewPage extends StatelessWidget {
                 ],
               ),
               pw.SizedBox(height: 15),
+
+              //     ],
+              //   );
+              // }));    pdf.addPage(pw.Page(
+              // pageFormat: PdfPageFormat.standard,
+              // build: (pw.Context context) {
+              //   return pw.Column(
+              //     children: [
+
+              // pw.Row(
+              //   children: [
+              //     pw.Expanded(
+              //         child: pw.Table(border: pw.TableBorder.all(), children: [
+              //           pw.TableRow(children: [
+              //             pw.Padding(
+              //               padding: const pw.EdgeInsets.all(5),
+              //               child: pw.Text('Earning',
+              //                   textAlign: pw.TextAlign.left,
+              //                   style:
+              //                   pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //             ),
+              //             pw.Padding(
+              //               padding: const pw.EdgeInsets.all(5),
+              //               child: pw.Text('Amount',
+              //                   textAlign: pw.TextAlign.left,
+              //                   style:
+              //                   pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //             ),
+              //           ]),
+              //           if (invoice.empsalReg!.basic != '0' &&
+              //               invoice.empsalReg!.basic != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('BASIC', textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.basic ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.hra != '0' &&
+              //               invoice.empsalReg!.hra != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('HRA', textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.hra ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.miscallow != '0' &&
+              //               invoice.empsalReg!.miscallow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Misc Allow	',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.miscallow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.commallow != '0' &&
+              //               invoice.empsalReg!.commallow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Comm Allow',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.commallow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.foodallow != '0' &&
+              //               invoice.empsalReg!.foodallow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Food Allow',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.foodallow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.otamount != '0' &&
+              //               invoice.empsalReg!.otamount != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('OT Amount	',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.otamount ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.conveyance != '0' &&
+              //               invoice.empsalReg!.conveyance != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Conveyance',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.conveyance ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.medical != '0' &&
+              //               invoice.empsalReg!.medical != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child:
+              //                 pw.Text('Medical', textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.medical ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.educationAllow != '0' &&
+              //               invoice.empsalReg!.educationAllow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Education Allowance	',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(
+              //                     invoice.empsalReg!.educationAllow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.lta != '0' &&
+              //               invoice.empsalReg!.lta != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('LTA', textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.lta ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.otherAllow != '0' &&
+              //               invoice.empsalReg!.otherAllow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Other Allowance',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.otherAllow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.arrears != '0' &&
+              //               invoice.empsalReg!.arrears != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child:
+              //                 pw.Text('Arrears', textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.arrears ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.incent != '0' &&
+              //               invoice.empsalReg!.incent != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Incentive',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.incent ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.mobileAllow != '0' &&
+              //               invoice.empsalReg!.mobileAllow != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Mobile Allow',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.mobileAllow ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.monthlybonus != '0' &&
+              //               invoice.empsalReg!.monthlybonus != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Monthly Bonus	',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.monthlybonus ?? '',
+              //                     textAlign: pw.TextAlign.left),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.statbonus != 0 &&
+              //               invoice.empsalReg!.statbonus != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Stat Bonus ',
+              //                     textAlign: pw.TextAlign.left,
+              //                     style: pw.TextStyle(
+              //                         fontWeight: pw.FontWeight.normal)),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(
+              //                     invoice.empsalReg!.statbonus!.toString() ?? '',
+              //                     textAlign: pw.TextAlign.left,
+              //                     style: pw.TextStyle(
+              //                         fontWeight: pw.FontWeight.normal)),
+              //               ),
+              //             ]),
+              //           if (invoice.empsalReg!.revgross != '0' &&
+              //               invoice.empsalReg!.revgross != '')
+              //             pw.TableRow(children: [
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text('Total Earnings ',
+              //                     textAlign: pw.TextAlign.left,
+              //                     style:
+              //                     pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //               ),
+              //               pw.Padding(
+              //                 padding: const pw.EdgeInsets.all(5),
+              //                 child: pw.Text(invoice.empsalReg!.revgross ?? '',
+              //                     textAlign: pw.TextAlign.left,
+              //                     style:
+              //                     pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //               ),
+              //             ]),
+              //         ])),
+              //     // pw.SizedBox(width: 10),
+              //     // pw.Expanded(
+              //     //   child: pw.Table(border: pw.TableBorder.all(), children: [
+              //     //     pw.TableRow(children: [
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text('Deduction',
+              //     //             textAlign: pw.TextAlign.left,
+              //     //             style:
+              //     //             pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //     //       ),
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text('Deduction Amount',
+              //     //             textAlign: pw.TextAlign.left,
+              //     //             style:
+              //     //             pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //     //       ),
+              //     //     ]),
+              //     //     if (invoice.empsalReg!.pf12 != '0' &&
+              //     //         invoice.empsalReg!.pf12 != '')
+              //     //       pw.TableRow(children: [
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text('P.F. @12%	',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text(invoice.empsalReg!.pf12 ?? '',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //       ]),
+              //     //     pw.TableRow(children: [
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text('ESIC @0.75%	',
+              //     //             textAlign: pw.TextAlign.left),
+              //     //       ),
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text(invoice.empsalReg!.esic175 ?? '',
+              //     //             textAlign: pw.TextAlign.left),
+              //     //       ),
+              //     //     ]),
+              //     //     pw.TableRow(children: [
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text('PT', textAlign: pw.TextAlign.left),
+              //     //       ),
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text(invoice.empsalReg!.ptax ?? '',
+              //     //             textAlign: pw.TextAlign.left),
+              //     //       ),
+              //     //     ]),
+              //     //     if (invoice.empsalReg!.retnamt != '0')
+              //     //       pw.TableRow(children: [
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text('Retention',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //       ]),
+              //     //     if (invoice.empsalReg!.otherDeduct != '0')
+              //     //       pw.TableRow(children: [
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text('Other Deduction',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //       ]),
+              //     //     if (invoice.empsalReg!.mlwf1 != '0')
+              //     //       pw.TableRow(children: [
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child:
+              //     //           pw.Text('MLWF', textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //         pw.Padding(
+              //     //           padding: const pw.EdgeInsets.all(5),
+              //     //           child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+              //     //               textAlign: pw.TextAlign.left),
+              //     //         ),
+              //     //       ]),
+              //     //     // if (invoice.employee!.workingFor != 'Shaunak Med Tech LLP')
+              //     //     pw.TableRow(children: [
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text('Total Deductions ',
+              //     //             textAlign: pw.TextAlign.left,
+              //     //             style:
+              //     //             pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //     //       ),
+              //     //       pw.Padding(
+              //     //         padding: const pw.EdgeInsets.all(5),
+              //     //         child: pw.Text(
+              //     //             (int.parse(invoice.empsalReg!.totalDeduct!))
+              //     //                 .toString(),
+              //     //             textAlign: pw.TextAlign.left,
+              //     //             style:
+              //     //             pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              //     //       ),
+              //     //     ]),
+              //     //   ]),
+              //     // ),
+              //   ],
+              // ),
               pw.Row(
                 children: [
+                  // pw.Expanded(
+                  //     child: pw.Table(border: pw.TableBorder.all(), children: [
+                  //       pw.TableRow(children: [
+                  //         pw.Padding(
+                  //           padding: const pw.EdgeInsets.all(5),
+                  //           child: pw.Text('Earning',
+                  //               textAlign: pw.TextAlign.left,
+                  //               style:
+                  //               pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  //         ),
+                  //         pw.Padding(
+                  //           padding: const pw.EdgeInsets.all(5),
+                  //           child: pw.Text('Amount',
+                  //               textAlign: pw.TextAlign.left,
+                  //               style:
+                  //               pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  //         ),
+                  //       ]),
+                  //       if (invoice.empsalReg!.basic != '0' &&
+                  //           invoice.empsalReg!.basic != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('BASIC', textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.basic ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.hra != '0' &&
+                  //           invoice.empsalReg!.hra != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('HRA', textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.hra ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.miscallow != '0' &&
+                  //           invoice.empsalReg!.miscallow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Misc Allow	',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.miscallow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.commallow != '0' &&
+                  //           invoice.empsalReg!.commallow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Comm Allow',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.commallow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.foodallow != '0' &&
+                  //           invoice.empsalReg!.foodallow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Food Allow',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.foodallow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.otamount != '0' &&
+                  //           invoice.empsalReg!.otamount != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('OT Amount	',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.otamount ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.conveyance != '0' &&
+                  //           invoice.empsalReg!.conveyance != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Conveyance',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.conveyance ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.medical != '0' &&
+                  //           invoice.empsalReg!.medical != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child:
+                  //             pw.Text('Medical', textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.medical ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.educationAllow != '0' &&
+                  //           invoice.empsalReg!.educationAllow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Education Allowance	',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(
+                  //                 invoice.empsalReg!.educationAllow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.lta != '0' &&
+                  //           invoice.empsalReg!.lta != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('LTA', textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.lta ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.otherAllow != '0' &&
+                  //           invoice.empsalReg!.otherAllow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Other Allowance',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.otherAllow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.arrears != '0' &&
+                  //           invoice.empsalReg!.arrears != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child:
+                  //             pw.Text('Arrears', textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.arrears ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.incent != '0' &&
+                  //           invoice.empsalReg!.incent != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Incentive',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.incent ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.mobileAllow != '0' &&
+                  //           invoice.empsalReg!.mobileAllow != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Mobile Allow',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.mobileAllow ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.monthlybonus != '0' &&
+                  //           invoice.empsalReg!.monthlybonus != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Monthly Bonus	',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.monthlybonus ?? '',
+                  //                 textAlign: pw.TextAlign.left),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.statbonus != 0 &&
+                  //           invoice.empsalReg!.statbonus != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Stat Bonus ',
+                  //                 textAlign: pw.TextAlign.left,
+                  //                 style: pw.TextStyle(
+                  //                     fontWeight: pw.FontWeight.normal)),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(
+                  //                 invoice.empsalReg!.statbonus!.toString() ?? '',
+                  //                 textAlign: pw.TextAlign.left,
+                  //                 style: pw.TextStyle(
+                  //                     fontWeight: pw.FontWeight.normal)),
+                  //           ),
+                  //         ]),
+                  //       if (invoice.empsalReg!.revgross != '0' &&
+                  //           invoice.empsalReg!.revgross != '')
+                  //         pw.TableRow(children: [
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text('Total Earnings ',
+                  //                 textAlign: pw.TextAlign.left,
+                  //                 style:
+                  //                 pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  //           ),
+                  //           pw.Padding(
+                  //             padding: const pw.EdgeInsets.all(5),
+                  //             child: pw.Text(invoice.empsalReg!.revgross ?? '',
+                  //                 textAlign: pw.TextAlign.left,
+                  //                 style:
+                  //                 pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  //           ),
+                  //         ]),
+                  //     ])),
+                  pw.SizedBox(width: 10),
                   pw.Expanded(
-                      child: pw.Table(border: pw.TableBorder.all(), children: [
-                    pw.TableRow(children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('Earning',
-                            textAlign: pw.TextAlign.left,
-                            style:
-                                pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('Amount',
-                            textAlign: pw.TextAlign.left,
-                            style:
-                                pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                    ]),
-                    if (invoice.empsalReg!.basic != '0' &&
-                        invoice.empsalReg!.basic != '')
+                    child: pw.Table(border: pw.TableBorder.all(), children: [
                       pw.TableRow(children: [
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('BASIC', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.basic ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.hra != '0' &&
-                        invoice.empsalReg!.hra != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('HRA', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.hra ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.miscallow != '0' &&
-                        invoice.empsalReg!.miscallow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Misc Allow	',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.miscallow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.commallow != '0' &&
-                        invoice.empsalReg!.commallow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Comm Allow',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.commallow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.foodallow != '0' &&
-                        invoice.empsalReg!.foodallow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Food Allow',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.foodallow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.otamount != '0' &&
-                        invoice.empsalReg!.otamount != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('OT Amount	',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.otamount ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.conveyance != '0' &&
-                        invoice.empsalReg!.conveyance != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Conveyance',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.conveyance ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.medical != '0' &&
-                        invoice.empsalReg!.medical != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child:
-                              pw.Text('Medical', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.medical ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.educationAllow != '0' &&
-                        invoice.empsalReg!.educationAllow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Education Allowance	',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(
-                              invoice.empsalReg!.educationAllow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.lta != '0' &&
-                        invoice.empsalReg!.lta != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('LTA', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.lta ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.otherAllow != '0' &&
-                        invoice.empsalReg!.otherAllow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Other Allowance',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.otherAllow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.arrears != '0' &&
-                        invoice.empsalReg!.arrears != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child:
-                              pw.Text('Arrears', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.arrears ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.incent != '0' &&
-                        invoice.empsalReg!.incent != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Incentive',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.incent ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.mobileAllow != '0' &&
-                        invoice.empsalReg!.mobileAllow != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Mobile Allow',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.mobileAllow ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.monthlybonus != '0' &&
-                        invoice.empsalReg!.monthlybonus != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Monthly Bonus	',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.monthlybonus ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.statbonus !=0 && invoice.empsalReg!.statbonus!='')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Stat Bonus ',
-                              textAlign: pw.TextAlign.left,
-                              style:
-                                  pw.TextStyle(fontWeight: pw.FontWeight.normal)),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(
-                              invoice.empsalReg!.statbonus!.toString() ?? '',
-                              textAlign: pw.TextAlign.left,
-                              style:
-                                  pw.TextStyle(fontWeight: pw.FontWeight.normal)),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.revgross != '0' &&
-                        invoice.empsalReg!.revgross != '')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Total Earnings ',
+                          child: pw.Text('Deduction',
                               textAlign: pw.TextAlign.left,
                               style:
                                   pw.TextStyle(fontWeight: pw.FontWeight.bold)),
                         ),
                         pw.Padding(
-                                padding: const pw.EdgeInsets.all(5),
-                                child: pw.Text(
-                                    invoice.empsalReg!.revgross??'',
-                                    textAlign: pw.TextAlign.left,
-                                    style: pw.TextStyle(
-                                        fontWeight: pw.FontWeight.bold)),
-                              ),
+                          padding: const pw.EdgeInsets.all(5),
+                          child: pw.Text('Deduction Amount',
+                              textAlign: pw.TextAlign.left,
+                              style:
+                                  pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                        ),
                       ]),
-                  ])),
-                  pw.SizedBox(width: 10),
-                  pw.Expanded(
-                      child: pw.Table(border: pw.TableBorder.all(), children: [
-                    pw.TableRow(children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('Deduction',
-                            textAlign: pw.TextAlign.left,
-                            style:
-                                pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('Deduction Amount',
-                            textAlign: pw.TextAlign.left,
-                            style:
-                                pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                    ]),
-                    if (invoice.empsalReg!.pf12 != '0'&&invoice.empsalReg!.pf12!='')
+                      if (invoice.empsalReg!.pf12 != '0' &&
+                          invoice.empsalReg!.pf12 != '')
+                        pw.TableRow(children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text('P.F. @12%	',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text(invoice.empsalReg!.pf12 ?? '',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                        ]),
                       pw.TableRow(children: [
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('P.F. @12%	',
+                          child: pw.Text('ESIC @0.75%	',
                               textAlign: pw.TextAlign.left),
                         ),
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.pf12 ?? '',
+                          child: pw.Text(invoice.empsalReg!.esic175 ?? '',
                               textAlign: pw.TextAlign.left),
                         ),
                       ]),
-                    pw.TableRow(children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('ESIC @0.75%	',
-                            textAlign: pw.TextAlign.left),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text(invoice.empsalReg!.esic175 ?? '',
-                            textAlign: pw.TextAlign.left),
-                      ),
-                    ]),
-                    pw.TableRow(children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text('PT', textAlign: pw.TextAlign.left),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(5),
-                        child: pw.Text(invoice.empsalReg!.ptax ?? '',
-                            textAlign: pw.TextAlign.left),
-                      ),
-                    ]),
-                    if (invoice.empsalReg!.retnamt != '0')
                       pw.TableRow(children: [
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Retention',
-                              textAlign: pw.TextAlign.left),
+                          child: pw.Text('PT', textAlign: pw.TextAlign.left),
                         ),
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.retnamt ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    if (invoice.empsalReg!.otherDeduct != '0')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('Other Deduction',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+                          child: pw.Text(invoice.empsalReg!.ptax ?? '',
                               textAlign: pw.TextAlign.left),
                         ),
                       ]),
-                    if (invoice.empsalReg!.mlwf1 != '0')
-                      pw.TableRow(children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text('MLWF', textAlign: pw.TextAlign.left),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.all(5),
-                          child: pw.Text(invoice.empsalReg!.retnamt ?? '',
-                              textAlign: pw.TextAlign.left),
-                        ),
-                      ]),
-                    // if (invoice.employee!.workingFor != 'Shaunak Med Tech LLP')
+                      if (invoice.empsalReg!.retnamt != '0')
+                        pw.TableRow(children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text('Retention',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                        ]),
+                      if (invoice.empsalReg!.otherDeduct != '0')
+                        pw.TableRow(children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text('Other Deduction',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                        ]),
+                      if (invoice.empsalReg!.mlwf1 != '0')
+                        pw.TableRow(children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child:
+                                pw.Text('MLWF', textAlign: pw.TextAlign.left),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.all(5),
+                            child: pw.Text(invoice.empsalReg!.retnamt ?? '',
+                                textAlign: pw.TextAlign.left),
+                          ),
+                        ]),
+                      // if (invoice.employee!.workingFor != 'Shaunak Med Tech LLP')
                       pw.TableRow(children: [
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
@@ -811,14 +1206,15 @@ class PdfPreviewPage extends StatelessWidget {
                         pw.Padding(
                           padding: const pw.EdgeInsets.all(5),
                           child: pw.Text(
-                              (int.parse(invoice.empsalReg!.totalDeduct!) )
+                              (int.parse(invoice.empsalReg!.totalDeduct!))
                                   .toString(),
                               textAlign: pw.TextAlign.left,
                               style:
                                   pw.TextStyle(fontWeight: pw.FontWeight.bold)),
                         ),
                       ]),
-                  ])),
+                    ]),
+                  ),
                 ],
               ),
               pw.SizedBox(height: 15),
