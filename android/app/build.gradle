@@ -54,8 +54,8 @@ android {
         applicationId "daksh.hrms.attendance"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 10
-        versionName "2.0"
+        versionCode 11
+        versionName "2.0.0"
     }
     signingConfigs {
         release {
