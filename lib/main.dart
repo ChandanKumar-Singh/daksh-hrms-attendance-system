@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 //   print(message.notification!.title);
 //   print(message.notification!.body);
 // }
-
+String name='HIII';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
