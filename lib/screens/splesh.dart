@@ -11,8 +11,6 @@ class _White_spleshState extends State<White_splesh> {
   final Gradient _gradient = LinearGradient(
     colors: [Color(0xffEE2B7A), Color(0xff6C2E91)],
 
-    // begin: Alignment.topLeft,
-    // end: Alignment.topRight,
   );
   //
   @override

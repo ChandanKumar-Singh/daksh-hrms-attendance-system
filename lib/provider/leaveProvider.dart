@@ -41,6 +41,7 @@ class LeaveProvider extends ChangeNotifier {
           res['data'].forEach((e) {
             leaves.add(LeaveModel.fromJson(e));
           });
+          debugPrint('last leave id ${leaves.first.id}');
           notifyListeners();
         } else {
           Fluttertoast.showToast(msg: res['message']);
@@ -91,7 +92,8 @@ class LeaveProvider extends ChangeNotifier {
       var res = await request.send();
       var responseData = await res.stream.toBytes();
       var result = String.fromCharCodes(responseData);
-      print('result--> $result');
+      print('result   addLeave--> ${request.url} ${request.fields}');
+      print('result   addLeave--> $result');
       if (jsonDecode(result)['status'] == 'Success') {
         await getLeaves();
 
@@ -126,9 +128,10 @@ class LeaveProvider extends ChangeNotifier {
     try {
       isLoadingLeave = true;
       notifyListeners();
+      print('result   deleteLeave--> $url $body');
       var response = await http.post(Uri.parse(url),
           headers: header, body: jsonEncode(body));
-      print('result--> $response');
+      print('result deleteLeave--> ${response.body}');
       if (jsonDecode(response.body)['status'] == 'Success') {
         AwesomeDialog(
           context: Get.context!,
@@ -164,10 +167,11 @@ class LeaveProvider extends ChangeNotifier {
     try {
       isLoadingRemLeave = true;
       notifyListeners();
+      print('result   getRemainingLeaves--> $url $body');
       var response = await http.post(Uri.parse(url),
           headers: header, body: jsonEncode(body));
       if (response.statusCode == 200) {
-        debugPrint('Leaves --> ${response.body}');
+        debugPrint('getRemainingLeaves $type --> ${response.body}');
         var res = jsonDecode(response.body);
         if (res['status'] == 'Success') {
           remainingLeave = res['totleave'].toString();

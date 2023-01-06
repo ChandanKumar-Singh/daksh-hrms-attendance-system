@@ -18,7 +18,7 @@ class CheckOutProvider {
     try {
       final strURL = Uri.parse(
           // 'https://monalisaedc.com/hrms/emp-backend/checkoutapi.php?employeeid=${employeeid}&tdate=${tdate}&outtime=${outtime}&latitude=${latitudefatched}&longitude=${longitudefatched}&location=${location}&intime=${intime}');
-          '${AppConst.baseUrl+Config.checkout}employeeid=${employeeid}&tdate=${tdate}&outtime=${outtime}&latitude=${latitudefatched}&longitude=${longitudefatched}&location=${location}&intime=${intime}');
+          '${AppConst.baseUrl + Config.checkout}employeeid=${employeeid}&tdate=${tdate}&outtime=${outtime}&latitude=${latitudefatched}&longitude=${longitudefatched}&location=${location}&intime=${intime}');
 
       final response =
           await http.get(strURL, headers: {'content-Type': 'application/json'});

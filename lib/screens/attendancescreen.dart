@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
                         chosenValue = formatter.format(value);
                         print(chosenValue);
                         getAttendanceBloc.getAttendanceSink(
-                            widget.employeeid, currentYear.toString(), chosenValue!);
+                            widget.employeeid, value.toString().split('-').first, chosenValue!);
                         setState(() {
                           isClick = false;
                           currentdate == formatter.format(value)
