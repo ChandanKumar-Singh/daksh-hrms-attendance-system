@@ -8,7 +8,7 @@ class ApprovalListBloc {
   final _repository = Repository();
   Stream<ApprovalListModel> get approvalListStream => _approvalList.stream;
 
-  Future approvalListSink(String employeeid,int month,int year) async {
+  Future approvalListSink(String employeeid, int month, int year) async {
     final ApprovalListModel model =
         await _repository.onApprovalListApi(employeeid, month, year);
     _approvalList.sink.add(model);

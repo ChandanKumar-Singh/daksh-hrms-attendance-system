@@ -69,10 +69,12 @@ class _ApprovedListPageState extends State<ApprovedListPage> {
   late List<Future<dynamic>> ascending = [];
   var asc;
 
-  ///
+  bool loadingData = false;
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+        'Connections State }   ${loadingData}');
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff0082FF),
@@ -113,240 +115,277 @@ class _ApprovedListPageState extends State<ApprovedListPage> {
           ),
           Column(
             children: [
-              ViewApprovalListCalender(employeeid: widget.employeeid!),
+              ViewApprovalListCalender(
+                  employeeid: widget.employeeid!,
+                  callBack: (loading) {
+                    setState(() {
+                      loadingData = loading;
+                    });
+                  }),
               Expanded(
-                child: StreamBuilder<ApprovalListModel>(
-                  stream: approvalListBloc.approvalListStream,
-                  builder: (context,
-                      AsyncSnapshot<ApprovalListModel> approvalListsnapshot) {
-                    if (!approvalListsnapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Color(0xffEE2B7A)),
-                        ),
-                      );
-                      // child: CircularProgressIndicator(
-                      //     valueColor: AlwaysStoppedAnimation(Color(0xffEE2B7A))))
-                    }
-                    // ascending = approvalListsnapshot as List<Future>;
-                    //  asc = approvalListsnapshot.data!.data!.sort((a,b) => a.dateofattendance!.compareTo(b.));
-                    return approvalListsnapshot.data!.data != null
-                        ? Padding(
-                            padding: const EdgeInsets.only(bottom: 43.0),
-                            child: ListView.separated(
-                              reverse: true,
-                              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                              itemCount: approvalListsnapshot
-                                  .data!.data!.reversed.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20.0,
-                                      top: 10.0,
-                                      bottom: 10.0),
-                                  child: Card(
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 80.0,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10.0),
-                                              topRight: Radius.circular(10.0),
-                                            ),
-                                            color: AppColor.buttonColor2
-                                                .withOpacity(0.05),
-                                          ),
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, right: 10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                child:  StreamBuilder<ApprovalListModel>(
+                        stream: approvalListBloc.approvalListStream,
+                        builder: (context,
+                            AsyncSnapshot<ApprovalListModel>
+                                approvalListsnapshot) {
+                          debugPrint(
+                              'Connections State ${approvalListsnapshot.connectionState}   ${loadingData}');
+                          if (approvalListsnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (!approvalListsnapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Color(0xffEE2B7A)),
+                              ),
+                            );
+                            // child: CircularProgressIndicator(
+                            //     valueColor: AlwaysStoppedAnimation(Color(0xffEE2B7A))))
+                          }
+                          // ascending = approvalListsnapshot as List<Future>;
+                          //  asc = approvalListsnapshot.data!.data!.sort((a,b) => a.dateofattendance!.compareTo(b.));
+
+                          return approvalListsnapshot.data!.data != null
+                              ? Padding(
+                                  padding: const EdgeInsets.only(bottom: 43.0),
+                                  child: ListView.separated(
+                                    reverse: true,
+                                    padding: EdgeInsets.only(
+                                        top: 20.0, bottom: 20.0),
+                                    itemCount: approvalListsnapshot
+                                        .data!.data!.reversed.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20.0,
+                                            right: 20.0,
+                                            top: 10.0,
+                                            bottom: 10.0),
+                                        child: Card(
+                                          elevation: 2,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                          child: Column(
                                             children: [
-                                              Flexible(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Text(
-                                                      "${approvalListsnapshot.data!.data![index].requesttext}"),
+                                              Container(
+                                                height: 80.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10.0),
+                                                    topRight:
+                                                        Radius.circular(10.0),
+                                                  ),
+                                                  color: AppColor.buttonColor2
+                                                      .withOpacity(0.05),
+                                                ),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0, right: 10.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Text(
+                                                            "${approvalListsnapshot.data!.data![index].requesttext}"),
+                                                      ),
+                                                    ),
+                                                    // Spacer(),
+                                                    Center(
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              // Spacer(),
-                                              Center(
-                                                child: Icon(
-                                                  Icons.check,
-                                                  color: Colors.green,
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Date",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff6F6C6C),
+                                                              fontFamily:
+                                                                  "popin",
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                        Text(
+                                                          "${approvalListsnapshot.data!.data![index].dateofattendance}",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontFamily:
+                                                                  "popin",
+                                                              fontSize: 12.sp),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Center(
+                                                      child: approvalListsnapshot
+                                                                      .data!
+                                                                      .data![
+                                                                          index]
+                                                                      .intime ==
+                                                                  '0.0' ||
+                                                              approvalListsnapshot
+                                                                      .data!
+                                                                      .data![
+                                                                          index]
+                                                                      .intime ==
+                                                                  '0:00'
+                                                          ? Column(
+                                                              children: [
+                                                                Text(
+                                                                    "Check Out",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'popin',
+                                                                        fontSize:
+                                                                            13)),
+                                                                Text(
+                                                                    "${approvalListsnapshot.data!.data![index].outtime}",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'popin',
+                                                                        fontSize:
+                                                                            13)),
+                                                              ],
+                                                            )
+                                                          : approvalListsnapshot
+                                                                          .data!
+                                                                          .data![
+                                                                              index]
+                                                                          .outtime ==
+                                                                      '0.0' ||
+                                                                  approvalListsnapshot
+                                                                          .data!
+                                                                          .data![
+                                                                              index]
+                                                                          .outtime ==
+                                                                      '0:00'
+                                                              ? Column(
+                                                                  children: [
+                                                                    Text(
+                                                                        "Check In",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'popin',
+                                                                            fontSize:
+                                                                                13)),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            2),
+                                                                    Text(
+                                                                        "${approvalListsnapshot.data!.data![index].intime}",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'popin',
+                                                                            fontSize:
+                                                                                13)),
+                                                                  ],
+                                                                )
+                                                              : Column(
+                                                                  children: [
+                                                                    Text(
+                                                                        "Check In/Out",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'popin',
+                                                                            fontSize:
+                                                                                13)),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            2),
+                                                                    Text(
+                                                                        "${approvalListsnapshot.data!.data![index].intime} / ${approvalListsnapshot.data!.data![index].outtime} ",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'popin',
+                                                                            fontSize:
+                                                                                13)),
+                                                                  ],
+                                                                ),
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          "Status",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff6F6C6C),
+                                                              fontFamily:
+                                                                  "popin",
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                        Text(
+                                                          " ${approvalListsnapshot.data!.data![index].isapproved}",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontFamily:
+                                                                  "popin",
+                                                              fontSize: 12.sp),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
+                                              )
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10.w,
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Date",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff6F6C6C),
-                                                        fontFamily: "popin",
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  Text(
-                                                    "${approvalListsnapshot.data!.data![index].dateofattendance}",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily: "popin",
-                                                        fontSize: 12.sp),
-                                                  ),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              Center(
-                                                child: approvalListsnapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .intime ==
-                                                            '0.0' ||
-                                                        approvalListsnapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .intime ==
-                                                            '0:00'
-                                                    ? Column(
-                                                        children: [
-                                                          Text("Check Out",
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'popin',
-                                                                  fontSize:
-                                                                      13)),
-                                                          Text(
-                                                              "${approvalListsnapshot.data!.data![index].outtime}",
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'popin',
-                                                                  fontSize:
-                                                                      13)),
-                                                        ],
-                                                      )
-                                                    : approvalListsnapshot
-                                                                    .data!
-                                                                    .data![
-                                                                        index]
-                                                                    .outtime ==
-                                                                '0.0' ||
-                                                            approvalListsnapshot
-                                                                    .data!
-                                                                    .data![
-                                                                        index]
-                                                                    .outtime ==
-                                                                '0:00'
-                                                        ? Column(
-                                                            children: [
-                                                              Text("Check In",
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          'popin',
-                                                                      fontSize:
-                                                                          13)),
-                                                              SizedBox(
-                                                                  width: 2),
-                                                              Text(
-                                                                  "${approvalListsnapshot.data!.data![index].intime}",
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          'popin',
-                                                                      fontSize:
-                                                                          13)),
-                                                            ],
-                                                          )
-                                                        : Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Check In/Out",
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          'popin',
-                                                                      fontSize:
-                                                                          13)),
-                                                              SizedBox(
-                                                                  width: 2),
-                                                              Text(
-                                                                  "${approvalListsnapshot.data!.data![index].intime} / ${approvalListsnapshot.data!.data![index].outtime} ",
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          'popin',
-                                                                      fontSize:
-                                                                          13)),
-                                                            ],
-                                                          ),
-                                              ),
-                                              Spacer(),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    "Status",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff6F6C6C),
-                                                        fontFamily: "popin",
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  Text(
-                                                    " ${approvalListsnapshot.data!.data![index].isapproved}",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily: "popin",
-                                                        fontSize: 12.sp),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 10.w,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      );
+                                    },
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SizedBox(
+                                        height: 0.0,
+                                      );
+                                    },
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    "${approvalListsnapshot.data!.message}",
+                                    style: TextStyle(
+                                        fontFamily: 'popin', fontSize: 13),
                                   ),
                                 );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return SizedBox(
-                                  height: 0.0,
-                                );
-                              },
-                            ),
-                          )
-                        : Center(
-                            child: Text(
-                              "${approvalListsnapshot.data!.message}",
-                              style:
-                                  TextStyle(fontFamily: 'popin', fontSize: 13),
-                            ),
-                          );
-                  },
-                ),
+                        },
+                      ),
               ),
             ],
           ),
@@ -357,9 +396,11 @@ class _ApprovedListPageState extends State<ApprovedListPage> {
 }
 
 class ViewApprovalListCalender extends StatefulWidget {
-  const ViewApprovalListCalender({Key? key, required this.employeeid})
+  const ViewApprovalListCalender(
+      {Key? key, required this.employeeid, required this.callBack})
       : super(key: key);
   final String employeeid;
+  final void Function(bool loading) callBack;
 
   @override
   State<ViewApprovalListCalender> createState() =>
@@ -424,7 +465,7 @@ class _ViewApprovalListCalenderState extends State<ViewApprovalListCalender> {
                 allowViewNavigation: false,
                 showNavigationArrow: true,
                 view: DateRangePickerView.year,
-                navigationMode:DateRangePickerNavigationMode.snap ,
+                navigationMode: DateRangePickerNavigationMode.snap,
                 headerStyle: DateRangePickerHeaderStyle(
                   textAlign: TextAlign.center,
                   textStyle: TextStyle(
@@ -454,6 +495,7 @@ class _ViewApprovalListCalenderState extends State<ViewApprovalListCalender> {
                   });
 
                   ///
+                  widget.callBack(true);
                   setState(() {
                     loadingList = true;
                   });
@@ -468,6 +510,7 @@ class _ViewApprovalListCalenderState extends State<ViewApprovalListCalender> {
                   setState(() {
                     loadingList = false;
                   });
+                  widget.callBack(false);
                 },
                 onViewChanged: (DateRangePickerViewChangedArgs args) {
                   final PickerDateRange visibleDates = args.visibleDateRange;
@@ -501,9 +544,11 @@ class _ViewApprovalListCalenderState extends State<ViewApprovalListCalender> {
               ),
               if (loadingList)
                 Container(
-                  color: Colors.grey.withOpacity(0.01),
+                  color: Colors.grey.withOpacity(0.05),
                   child: Center(
-                    child: CupertinoActivityIndicator(color: Colors.blue.withOpacity(1)),
+                    child: CupertinoActivityIndicator(
+                      radius: 30,
+                        color: Colors.black.withOpacity(1)),
                   ),
                 ),
             ],
