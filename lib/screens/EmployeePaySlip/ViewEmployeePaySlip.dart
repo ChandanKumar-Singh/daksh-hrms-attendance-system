@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dakshattendance/AppConst/AppConst.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -173,6 +174,7 @@ class PdfPreviewPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        if(invoice.employee!.joindt!=null)
                         pw.Row(
                           children: [
                             pw.Text(
@@ -183,7 +185,8 @@ class PdfPreviewPage extends StatelessWidget {
                               ),
                             ),
                             pw.Text(
-                              '${invoice.employee!.joindt ?? ''}',
+                              // '${DateFormat('dd-MM-yyyy').format(DateTime.parse(invoice.employee!.joindt))}',
+                              '${invoice.employee!.joindt.toString().split('-').reversed.join('-')}',
                               style: pw.TextStyle(
                                 fontFallback: [emoji],
                                 fontWeight: pw.FontWeight.normal,
