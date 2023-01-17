@@ -314,7 +314,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                                         var date = await showDatePicker(
                                             initialDate: DateTime.now(),
                                             context: context,
-                                            firstDate: DateTime.now(),
+                                            firstDate: DateTime(2000),
                                             lastDate: DateTime(DateTime.now()
                                                 .add(Duration(days: 1080))
                                                 .year));
@@ -365,7 +365,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                                         var date = await showDatePicker(
                                             initialDate: DateTime.now(),
                                             context: context,
-                                            firstDate: DateTime.now(),
+                                            firstDate: DateTime(2000),
                                             lastDate: DateTime(DateTime.now()
                                                 .add(Duration(days: 1080))
                                                 .year));
