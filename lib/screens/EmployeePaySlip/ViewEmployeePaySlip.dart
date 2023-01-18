@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dakshattendance/AppConst/AppConst.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -79,6 +80,37 @@ class PdfPreviewPage extends StatelessWidget {
     pdf.addPage(pw.Page(
         pageFormat: PdfPageFormat.standard,
         build: (pw.Context context) {
+          String companyName = invoice.employee!.companyName?? '';
+          var cinNo = '';
+          print('company name $companyName');
+          if (companyName != '') {
+            if (companyName.contains('cin')) {
+              cinNo = companyName.split('cin').last;
+              companyName = companyName.split('cin').first;
+              bool conHyphon=companyName.contains("-");
+              // print(companyName.lastIndexOf('-'));
+              // print(companyName.length);
+              if(conHyphon){
+                if(companyName.lastIndexOf('-')== companyName.length-1||companyName.lastIndexOf('-')== companyName.length-2){
+                  print('0000000000000');
+                 companyName= companyName.replaceRange(companyName.lastIndexOf('-'), null, '');
+                }
+              }
+              print(cinNo);
+            } else if (companyName.contains('CIN')) {
+              cinNo = companyName.split('- CIN').last;
+              companyName = companyName.split('- CIN').first;
+              bool conHyphon=companyName.contains("-");
+              // print(companyName.lastIndexOf('-'));
+              // print(companyName.length);
+              if(conHyphon){
+                if(companyName.lastIndexOf('-')== companyName.length-1||companyName.lastIndexOf('-')== companyName.length-2){
+                  print('0000000000000');
+                  companyName= companyName.replaceRange(companyName.lastIndexOf('-'), null, '');
+                }
+              }
+            }
+          }
           return pw.Container(
               decoration: pw.BoxDecoration(
                 borderRadius: pw.BorderRadius.circular(2),
@@ -99,16 +131,36 @@ class PdfPreviewPage extends StatelessWidget {
                               children: [
                                 pw.Expanded(
                                   child: pw.Text(
-                                    invoice.employee!.companyName ?? '',
+                                    companyName,
                                     textAlign: pw.TextAlign.center,
                                     style: pw.TextStyle(
                                         fontFallback: [emoji],
                                         fontWeight: pw.FontWeight.bold,
-                                        fontSize: 18),
+                                        fontSize: 15),
                                   ),
                                 ),
                               ],
                             ),
+                            (invoice.employee!.companyName != null &&
+                                    invoice.employee!.companyName!
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains('cin')
+                                ? pw.Row(
+                                    children: [
+                                      pw.Expanded(
+                                        child: pw.Text(
+                                          'CIN$cinNo',
+                                          textAlign: pw.TextAlign.center,
+                                          style: pw.TextStyle(
+                                              fontFallback: [emoji],
+                                              fontWeight: pw.FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : pw.SizedBox(height: 10)),
                             pw.Text(
                               invoice.employee!.companyAddress ?? '',
                               textAlign: pw.TextAlign.center,
@@ -118,7 +170,7 @@ class PdfPreviewPage extends StatelessWidget {
                                 // fontSize: 18
                               ),
                             ),
-                            pw.SizedBox(height: 3),
+                            pw.SizedBox(height: 10),
                             pw.Row(
                               mainAxisAlignment: pw.MainAxisAlignment.center,
                               children: [
@@ -1262,7 +1314,7 @@ class PdfPreviewPage extends StatelessWidget {
                     pw.Text('${invoice.empsalReg!.netPay ?? '' + ' /-'}',
                         textAlign: pw.TextAlign.left,
                         style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                    pw.Text(' /-',
+                    pw.Text('/-',
                         textAlign: pw.TextAlign.left,
                         style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
                   ]),
